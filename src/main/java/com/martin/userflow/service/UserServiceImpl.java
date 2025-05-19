@@ -7,6 +7,8 @@ import com.martin.userflow.mapper.UserMapper;
 import com.martin.userflow.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService{
 
@@ -32,5 +34,20 @@ public class UserServiceImpl implements UserService{
         // Step 4: Return to the client
         return responseDTO;
 
+    }
+
+    @Override
+    public List<UserResponseDTO> findAll() {
+
+        // Step 1: Retrieve all User entities from the database
+        List<User> users = userRepository.findAll();
+
+        // Step 2: Map each User entity to a UserResponseDTO
+        List<UserResponseDTO> userResponseDTOList = users.stream()
+                .map(UserMapper::toDTO)
+                .toList();
+
+        // Step 3: Return the list of UserResponseDTOs
+        return userResponseDTOList;
     }
 }
