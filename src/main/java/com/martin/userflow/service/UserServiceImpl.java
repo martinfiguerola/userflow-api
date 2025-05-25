@@ -8,6 +8,7 @@ import com.martin.userflow.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -38,7 +39,6 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public List<UserResponseDTO> findAll() {
-
         // Step 1: Retrieve all User entities from the database
         List<User> users = userRepository.findAll();
 
@@ -49,5 +49,29 @@ public class UserServiceImpl implements UserService{
 
         // Step 3: Return the list of UserResponseDTOs
         return userResponseDTOList;
+    }
+
+    @Override
+    public Optional<UserResponseDTO> update(Long id, UserRequestDTO userRequestDTO) {
+
+        // Step 1: Find the user by ID. If not found, the Optional will be empty.
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        // Step 2: If the user exists, update, save, convert, and return an Optional with your DTO;
+        // otherwise, return an empty Optional.
+        return optionalUser.map(existUser -> {
+            // Update the user fields with the data from the request
+            existUser.setName(userRequestDTO.getName());
+            existUser.setEmail(userRequestDTO.getEmail());
+            existUser.setPassword(userRequestDTO.getPassword());
+
+            // Save the updated user
+            User savedUser = userRepository.save(existUser);
+
+            // Convert the saved and saved entity to a DTO and return it
+            return UserMapper.toDTO(savedUser);
+
+        });
+
     }
 }

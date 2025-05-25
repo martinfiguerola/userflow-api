@@ -48,7 +48,7 @@ mvn spring-boot:run
 ### `POST /api/users`
 
 #### Description
-Creates a new user in the database.
+This endpoint creates a new user in the database.
 
 #### Request Body:
 ```json 
@@ -63,7 +63,7 @@ Creates a new user in the database.
 
 ```json
 {
-  "id": "1",
+  "id": 1,
   "name": "john",
   "email": "john.doe@example.com"
 }
@@ -87,7 +87,7 @@ This endpoint does not require any parameters.
 ```json
 [
   {
-    "id": "1",
+    "id": 1,
     "name": "john",
     "email": "john.doe@example.com"
   }
@@ -95,6 +95,42 @@ This endpoint does not require any parameters.
 ```
 #### Possible Errors
 - `500 Internal Server Error`: Unexpected server error.
+
+---
+
+### `PUT /api/users/{id}`
+
+#### Description
+Updates an existing user by ID with the provided name, email, and password.
+
+#### Parameters
+| Name | Type | Location | Description              | Required |
+|------|------|----------|--------------------------|----------|
+| id   | Long | Path     | ID of the user to update | Yes      | 
+
+#### Request Body
+
+```json 
+{
+  "name": "New Name",
+  "email": "new.email@example.com",
+  "password": "newPassword123"
+}
+
+```
+
+#### Successful Response `200 OK`
+
+```json
+{
+  "id": 31,
+  "name": "New Name",
+  "email": "new.email@example.com"
+}
+```
+#### Possible Errors
+- `404 Not Found`: User with the given ID does not exist.
+- `400 Bad Request`: Invalid input.
 
 
 ## 📄 License

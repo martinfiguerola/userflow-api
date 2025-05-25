@@ -34,4 +34,12 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<UserResponseDTO> updateUser (@PathVariable Long id, @Valid @RequestBody UserRequestDTO userRequestDTO) {
+         return userService.update(id, userRequestDTO)
+                 .map( userResponseDTO -> ResponseEntity.status(HttpStatus.OK).body(userResponseDTO))
+                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+
+    }
+
 }
