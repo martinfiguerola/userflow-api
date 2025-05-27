@@ -74,4 +74,17 @@ public class UserServiceImpl implements UserService{
         });
 
     }
+
+    @Override
+    public Boolean deleteById(Long id) {
+        // Step 1: Find the user by ID. If not found, the Optional will be empty.
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        // If the user exists, delete it and return true; otherwise, return false
+        return optionalUser.map(user -> {
+            userRepository.delete(user);
+            return true;
+        }).orElse(false);
+
+    }
 }
