@@ -132,6 +132,25 @@ Updates an existing user by ID with the provided name, email, and password.
 - `404 Not Found`: User with the given ID does not exist.
 - `400 Bad Request`: Invalid input.
 
+---
+
+### `DELETE api/users/{id}`
+
+#### Description
+Deletes an existing user by ID.
+
+#### Parameters
+| Name | Type | Location | Description              | Required |
+|------|------|----------|--------------------------|----------|
+| id   | Long | Path     | ID of the user to delete | Yes      | 
+
+
+#### Successful Response 
+
+- `204 Not Content`
+
+#### Possible Errors 
+- `404 Not Found`: User with the given ID does not exist.
 
 ## 📄 License
 This project is open-source and available under the MIT License.
