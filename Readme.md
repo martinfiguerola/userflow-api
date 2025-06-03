@@ -152,6 +152,33 @@ Deletes an existing user by ID.
 #### Possible Errors 
 - `404 Not Found`: User with the given ID does not exist.
 
+---
+
+### `GET /api/users/{id}`
+
+#### Description
+Retrieves a user by their unique identifier.
+
+#### Parameters
+| Name | Type | Location | Description                | Required |
+|------|------|----------|----------------------------|----------|
+| id   | Long | Path     | ID of the user to retrieve | Yes      | 
+
+#### Successful Response `200 OK`
+
+```json
+
+{
+  "id": 1,
+  "name": "john",
+  "email": "john.doe@example.com"
+}
+
+```
+
+#### Possible Errors
+- `404 Not Found`: User with the given ID does not exist.
+
 ## 📄 License
 This project is open-source and available under the MIT License.
 
