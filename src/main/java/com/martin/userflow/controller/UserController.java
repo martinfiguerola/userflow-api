@@ -48,4 +48,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User with the given ID does not exist.");
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<UserResponseDTO> getOneUser (@PathVariable Long id) {
+        return userService.findById(id)
+                .map( user -> ResponseEntity.status(HttpStatus.OK).body(user))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
 }

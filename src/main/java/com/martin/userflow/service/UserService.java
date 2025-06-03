@@ -13,5 +13,6 @@ public interface UserService {
     List<UserResponseDTO> findAll ();
     Optional<UserResponseDTO> update (Long id, UserRequestDTO userRequestDTO);
     Boolean deleteById (Long id);
+    Optional<UserResponseDTO> findById (Long id);
 
 }

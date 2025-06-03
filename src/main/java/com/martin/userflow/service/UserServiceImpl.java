@@ -87,4 +87,13 @@ public class UserServiceImpl implements UserService{
         }).orElse(false);
 
     }
+
+    @Override
+    public Optional<UserResponseDTO> findById(Long id) {
+        // Step 1: Find the user by ID. If not found, the Optional will be empty.
+        Optional<User> optionalUser = userRepository.findById(id);
+        // Step 2: If the user exists, return userDTO otherwise, return optional empty
+        return optionalUser.map(UserMapper::toDTO);
+
+    }
 }
